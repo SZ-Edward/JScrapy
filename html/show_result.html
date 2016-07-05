@@ -1,0 +1,42 @@
+<html>
+<head>
+<title>爬取内容展示</title>
+<link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.12/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript" charset="utf8" src="http://cdn.datatables.net/1.10.12/js/jquery.dataTables.js"></script>
+</head>
+<body>
+  <select id="website">
+    <option value="zhihuDaily">知乎日报</option>
+    <option value="imdb">IMDb Top Rated 250 Movies</option>
+  </select>
+  <table id="res" class="display"></table>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      var options = {
+          searching: false,
+          ordering:  false,
+          bLengthChange: false,
+          // sPaginationType: "full_numbers",
+          pageLength: 10,
+          processing: true,
+          serverSide: true,
+          ajax: {
+              url: '/scrape?q=zhihuDaily',
+              dataSrc: 'data'
+          },
+          columns: [
+              { data: '_id', title: "链接地址" },
+              { data: 'title', title: "标题" },
+              { data: 'sourceCode', title: "来源" }
+          ]
+      };
+      var table = $('#res').DataTable(options);
+      $('#website').on('change', function (){
+        var _url = '/scrape?q=' + $('#website').find('option:selected').val();
+        table.ajax.url(_url).load();
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+{
+  "url": {
+    "ZhihuDaily": "http://daily.zhihu.com",
+		"IMDb": "http://www.imdb.com/chart/top?ref_=nv_mv_250_6"
+  },
+	"db": {
+		"url": "mongodb://localhost:27017/test"
+  }
+}
